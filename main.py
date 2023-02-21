@@ -42,6 +42,10 @@ def main():
             console.print(" ")
             exit(0)
 
+        """
+        Miałem zaimplementować jakieś eventy, ale nie miałem pomysłu
+        """
+
         delay(1)
         console.print(f"[bold]====================[/bold]")
         console.print(f"[bold]====== Day  {day} ======[/bold]")
