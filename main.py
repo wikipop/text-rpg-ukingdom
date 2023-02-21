@@ -23,7 +23,7 @@ def start(console):
     console.print("You don't remember anything, but you know that you have to get out of here.")
     delay(2)
 
-    return Player(name, 100, 10, 0, 0)
+    return Player(name, 100, 10, 0, 0, 3)
 
 
 def main():
