@@ -4,12 +4,12 @@ Text-based RPG
 """
 from helper_f import delay, print_stats, actions, shop
 from entity import Player
+from combat import combat
 from rich.console import Console
 
 
 def start(console):
-    return Player("Wiktor", 100, 10, 0, 0)
-
+    console.print(" ")
     console.print("Welcome to the game!")
     delay(0.5)
     console.print("What is your name?")
@@ -33,16 +33,33 @@ def main():
     room = 0
 
     while player.is_alive():
+
+        if room == 5:
+            console.print(" ")
+            console.print("You have reached the exit!")
+            console.print(" ")
+            console.print("Congratulations!")
+            console.print(" ")
+            exit(0)
+
         delay(1)
         console.print(f"[bold]====================[/bold]")
         console.print(f"[bold]====== Day  {day} ======[/bold]")
         console.print(f"[bold]====== Room {room} ======[/bold]")
         console.print(f"[bold]====================[/bold]")
+        console.print(" ")
         while (action := str(actions(console))) != "4":
             match action:
                 case "1":
-                    console.print("You go to the next room.")
-                    delay(1)
+                    if combat(console, player, day):
+                        room = + 1
+                        console.print(" ")
+                        console.print("After long fight...")
+                        console.print("You feel that you are getting closer to the exit.")
+                        console.print("But also you need to get some rest.")
+                        console.print(" ")
+                        delay(1)
+                        break
                 case "2":
                     shop(console, player)
                 case "3":
