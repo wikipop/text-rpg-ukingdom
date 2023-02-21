@@ -2,8 +2,8 @@
 Text-based RPG
 - Wiktor Popiołek
 """
-from helper_f import delay, print_stats
-from player import Player
+from helper_f import delay, print_stats, actions, shop
+from entity import Player
 from rich.console import Console
 
 
@@ -29,10 +29,30 @@ def start(console):
 def main():
     console = Console()
     player = start(console)
+    day = 0
+    room = 0
 
     while player.is_alive():
-        print_stats(player, console)
-        delay(10)
+        delay(1)
+        console.print(f"[bold]====================[/bold]")
+        console.print(f"[bold]====== Day  {day} ======[/bold]")
+        console.print(f"[bold]====== Room {room} ======[/bold]")
+        console.print(f"[bold]====================[/bold]")
+        while (action := str(actions(console))) != "4":
+            match action:
+                case "1":
+                    console.print("You go to the next room.")
+                    delay(1)
+                case "2":
+                    shop(console, player)
+                case "3":
+                    print_stats(player, console)
+                case _:
+                    console.print("Wrong input!")
+
+        print("Sleeping...")
+        delay(1)
+        day = + 1
 
 
 if __name__ == '__main__':
